@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+    
+<?
+    session_start();
+?>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>MMM</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,14 +30,43 @@
   </head>
 
   <body>
+      
+    
 
     <div class="container">
-      <form class="form-signin" role="form" action= 'signup.php' method='post'>
-        <h2 class="form-signin-heading">New Account</h2>
+    
+    
+        
+      <form class="form-signin" role="form" action= 'login.php' method='post'>  
+          
+          <?
+        if($_SESSION['signupmessage'] == 1)
+        {
+    ?>
+            <h3>Thank you <br>for Registering!</h3>
+    <?
+            $_SESSION['signupmessage'] = 0;
+        }
+    ?>
+          
+          
+        <h2 class="form-signin-heading">Please sign in</h2>
         <input type='text' class='form-control' placeholder='Username' name='username' id='username' value='' />
-        <input type='text' class='form-control' placeholder='Password' name='password' id='password' value=''/>
-        <input type='text' class='form-control' placeholder='Confirm Password' name='password' id='password' value=''/>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+        <input type='password' class='form-control' placeholder='Password' name='password' id='password' value=''/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p><a href='signup.php'>Sign up</a></p>
+          
+          <?
+        if($_SESSION['loginerror'] == 1)
+        {
+    ?>
+            <h3>Bad username <br>or password!</h3>
+    <?
+            $_SESSION['loginerror'] = 0;
+        }
+    ?>
+          
+          
       </form>
 
     </div> <!-- /container -->

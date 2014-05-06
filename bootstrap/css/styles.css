@@ -1,5 +1,37 @@
-/* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
+  padding-top: 100px;
   padding-bottom: 20px;
 }
+
+footer {
+   position:absolute;
+   bottom:0;
+}
+
+.name {
+}
+
+.numbers {
+    list-style: none;
+}
+
+.numbers ul {
+
+}
+
+.addButton {
+    float: right;   
+}
+
+.form-control {
+    width: 80%; 
+}
+
+.btn, btn-primary {
+ float: right;   
+}
+
+ul {
+    -webkit-padding-start: 0px;
+}
+

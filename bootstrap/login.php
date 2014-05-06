@@ -12,11 +12,12 @@
 	
 	if ($_POST[password] != $row['password']) 
  	{
-		echo "BAD USERNAME/PASSWORD";
+		$_SESSION['loginerror'] = 1;
+		header("Location: http://isat-cit.marshall.edu/ist436/mmm/");
  	}
 	else
 	{
 		$_SESSION['userID'] = $row['userID'];
-		header("Location: http://isat-cit.marshall.edu/ist436/mmm/contacts.html");
+		header("Location: http://isat-cit.marshall.edu/ist436/mmm/contacts.php");
 	}	
 ?>

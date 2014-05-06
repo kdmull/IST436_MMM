@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+
+<?
+    session_start();
+	require_once "mysql.php";
+
+	$db = new database();
+?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,13 +16,16 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>MMM</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/styles.css" rel="stylesheet">
+      
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -36,15 +47,43 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-            <a class="navbar-brand" href="newContact.html">New Contact</a>
-            <a class="navbar-brand" href="newGroup.html">New Group</a>  
+          </button> 
+            <a class="navbar-brand" href="contacts.html">Home</a>
             <a class="navbar-brand" href="logout.php">Logout</a>
             
         </div>
       </div>
+        
+        
     </div>
       
+<div class="container">
+      <form class="form-signin" role="form" action= 'signup.php' method='post'>
+        <div class='name'>
+            <h2 class="form-signin-heading">!!!NAME of USER!!!</h2>
+        </div>
+        <div class="numbers">
+            <li>
+                <?
+                    $result = $db->select('number, type', 'phone', "contactID = 1");
+	
+                    while($row = $db->fetch($result))
+                    {
+                ?>
+                    <button class="btn btn-primary" type="submit">Remove</button>   
+                    <ul><? echo $row['number'] . " " . $row['type'];?></ul>   
+                <?
+                    }
+                ?>
+                <br><button class="btn btn-primary" type="submit">Add</button>    
+            </li>
+        </div>
+
+        <input type='text' class='form-control' placeholder='Email' name='email' id='email' value='' />
+      </form>
+
+    </div>
+<!--      
     <div class="table-responsive">
 <table class="table table-bordered" width="625">
 <tbody>
@@ -66,7 +105,7 @@
 </tr>
 </tbody>
 </table>
-</div>
+</div> -->
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <!--<div class="jumbotron">

@@ -1,37 +1,18 @@
 <?
     // start a session to handle all session variables
     session_start();
+
+    require_once "mysql.php";
+
+	$db = new database();
     
     // if there is a session started, that has a variable
     // authenticated within it, whose value is true
     // it will show the page's contents
     // otherwise, it redirects back to the login
-    if (!$_SESSION[authenticated] == true)
-        header("location:/436/login/");
+     if (!$_SESSION['userID'] > 0 )
+        header("location:http://isat-cit.marshall.edu/ist436/mmm/");
 ?>
-
-<!DOCTYPE html>
-    <head>
-        <title>Login</title>
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
-    </head>
-    
-    <body>
-        <div data-role='page' id='login'>
-            <div data-role='header' data-position='fixed'>
-                <h1>SECURED!  Warning!</h1>
-            </div>
-            <div data-role='content'>
-                This is secured content... only visible if logged in.
-            </div>
-            <div data-role="footer" data-position="fixed">
-                <p>&copy;2014, Marshall University</p>
-            </div>
-        </div>
-    </body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,7 +23,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>MMM</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -71,26 +52,37 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="newContact.html">New Contact</a>
-            <a class="navbar-brand" href="newGroup.html">New Group</a>   
+            <a class="navbar-brand" href="newContact.html">New Contact</a>
+            <a class="navbar-brand" href="newGroup.html">New Group</a>  
+            <a class="navbar-brand" href="logout.php">Logout</a>
+            
         </div>
-    <!--      
-        <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse --> 
       </div>
     </div>
+      
+    <div class="table-responsive">
+<table class="table table-bordered" width="625">
+<tbody>
+
+ 
+ <?
+    $result = $db->select('fName, lName', 'contact', "userID =  " . $_SESSION['userID'] . " ORDER BY lName ASC");
+	
+    while($row = $db->fetch($result))
+    {
+ ?>
+    
+<tr><td><? echo  $row['fName'] . " " . $row['lName']; ?></td></tr>
+<?
+    }
+?>
+    
+</tbody>
+</table>
+</div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <!--<div class="jumbotron">
       <div class="container">
         <h1>Hello, world!</h1>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
@@ -100,7 +92,7 @@
 
     <div class="container">
       <!-- Example row of columns -->
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-4">
           <h2>Heading</h2>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -116,12 +108,11 @@
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
-      </div>
-
+      </div> -->
       <hr>
 
       <footer>
-        <p>&copy; Company 2014</p>
+        <p>&copy; The MMM Company</p>
       </footer>
     </div> <!-- /container -->
 
